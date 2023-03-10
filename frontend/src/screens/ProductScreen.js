@@ -8,9 +8,6 @@ const ProductScreen = () => {
 
     const [product, setProduct] = useState({});
     const parameters = useParams();
-    useEffect(() => {
-
-    }, [parameters]);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -20,7 +17,7 @@ const ProductScreen = () => {
         }
 
         fetchProduct();
-    }, []);
+    }, [parameters]);
 
     return (
         <>

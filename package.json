@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "MERN ProShop eCommerce App",
     "main": "server.js",
+    "type": "module",
     "scripts": {
         "start": "node backend/server",
         "server": "nodemon backend/server",
@@ -12,6 +13,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "dotenv": "^16.0.3",
         "express": "^4.18.2"
     },
     "devDependencies": {
