@@ -1,16 +1,26 @@
-import React, { useEffect } from 'react';
-import products from '../products';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 import Rating from '../components/Rating';
+import axios from 'axios';
 
 const ProductScreen = () => {
+
+    const [product, setProduct] = useState({});
     const parameters = useParams();
     useEffect(() => {
 
-    }, [parameters])
+    }, [parameters]);
 
-    const product = products.find(p => p._id === parameters.productId);
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const { data } = await axios.get(`/api/products/${parameters.id}`);
+
+            setProduct(data);
+        }
+
+        fetchProduct();
+    }, []);
 
     return (
         <>
