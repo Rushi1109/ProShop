@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Schema for storing review details
 const reviewSchema = mongoose.Schema({
     name: {
         type: String,
@@ -15,8 +16,9 @@ const reviewSchema = mongoose.Schema({
     }
 }, {
     timestamps: true,
-})
+});
 
+// Schema for storing products details
 const productSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,

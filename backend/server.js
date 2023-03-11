@@ -8,6 +8,7 @@ connectDB();
 
 const app = express();
 
+// API testing
 app.get('/', (req,res) => {
     res.send(`Api is running`);
 });
@@ -21,4 +22,5 @@ app.get('/api/products/:id', (req,res) => {
     res.json(product);
 });
 
+// Run Server on given PORT
 app.listen(process.env.PORT, console.log(`Server Running on port ${process.env.PORT}`));
