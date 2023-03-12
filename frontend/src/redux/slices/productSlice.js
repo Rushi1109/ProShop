@@ -14,11 +14,6 @@ const productSlice = createSlice({
         status: 'idle',
         error: null,
     },
-    // reducers: {
-    //     loadProducts: (state, action) => {
-    //         state.products = action.payload;
-    //     }
-    // }
     extraReducers: function (builder) {
         builder
             .addCase(listProduct.pending, (state, action) => {
@@ -35,5 +30,4 @@ const productSlice = createSlice({
     }
 });
 
-export const { loadProducts } = productSlice.actions;
 export default productSlice.reducer;

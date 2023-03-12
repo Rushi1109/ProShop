@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 export const listProductDetail = createAsyncThunk('productDetails/fetch', async (id) => {
-    console.log('here');
     const { data } = await axios.get(`/api/products/${id}`);
     return data;
 });
@@ -14,11 +13,6 @@ const productDetailSlice = createSlice({
         status: 'idle',
         error: null,
     },
-    // reducers: {
-    //     loadProductDetail: (state, action) => {
-    //         state.products = action.payload;
-    //     }
-    // },
     extraReducers: function (builder) {
         builder
             .addCase(listProductDetail.pending, (state, action) => {
@@ -35,5 +29,4 @@ const productDetailSlice = createSlice({
     }
 });
 
-export const { loadProductDetail } = productDetailSlice.actions;
 export default productDetailSlice.reducer;
