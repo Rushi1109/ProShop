@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap'
 import Message from '../components/Message';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProductToCart } from '../redux/slices/cartSlice';
+import { addProductToCart, removeFromCart } from '../redux/slices/cartSlice';
 
 const CartScreen = () => {
     // To get the product id from parameter
@@ -39,7 +39,7 @@ const CartScreen = () => {
     }
 
     const removeFromCartHandler = (id) => {
-        console.log('remove');
+        dispatch(removeFromCart(id));
     }
 
     const checkoutHandler = () => {
@@ -99,4 +99,4 @@ const CartScreen = () => {
     )
 }
 
-export default CartScreen
+export default CartScreen;

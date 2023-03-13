@@ -25,6 +25,12 @@ const cartSlice = createSlice({
         status: 'idle',
         error: null,
     },
+    reducers: {
+        removeFromCart: (state, action) => {
+            state.cart = state.cart.filter(x => x.product !== action.payload);
+            window.localStorage.setItem('cartItems', JSON.stringify(state.cart));
+        }
+    },
     extraReducers: function (builder) {
         builder
             .addCase(addProductToCart.pending, (state, action) => {
@@ -54,6 +60,7 @@ const cartSlice = createSlice({
     }
 });
 
+export const { removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 
