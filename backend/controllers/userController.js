@@ -6,8 +6,10 @@ import generateToken from '../utils/generateToken.js';
 // @route   POST api/users/login
 // @access  public
 const authUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+    const email = req.body.email;
+    const password = req.body.password;
 
+    // console.log(email, password);
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
@@ -19,8 +21,9 @@ const authUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id),
         })
     } else {
-        res.status(401);
-        throw new Error('Invalid Email or Password');
+        // res.status(401).json({message: 'Invalid Email or Password'});
+        res.status(500).json({message:'Invalid email or pasoowrd'});
+        // throw new Error('Invalid Email or Password');
     }
 });
 
@@ -72,7 +75,7 @@ const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id),
         })
     }
-    else{
+    else {
         res.status(400);
         throw new Error("Invalid user data");
     }
