@@ -27,6 +27,12 @@ const userSlice = createSlice({
         status: 'idle',
         error: null,
     },
+    reducers: {
+        userLogout: (state, action) => {
+            window.localStorage.removeItem('userInfo');
+            state.userLogin = userInfoFromStorage;
+        }
+    },
     extraReducers: function (builder) {
         builder
             .addCase(login.pending, (state, action) => {
@@ -45,4 +51,5 @@ const userSlice = createSlice({
     }
 });
 
+export const { userLogout } = userSlice.actions;
 export default userSlice.reducer;
