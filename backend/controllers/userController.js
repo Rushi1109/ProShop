@@ -13,7 +13,7 @@ const authUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
-        res.json({
+        return res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -22,7 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
         })
     } else {
         // res.status(401).json({message: 'Invalid Email or Password'});
-        res.status(500).json({message:'Invalid email or pasoowrd'});
+        return res.status(500).send({err:'Invalid email or pasoowrd'});
         // throw new Error('Invalid Email or Password');
     }
 });
@@ -34,7 +34,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
-        res.json({
+        return res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -42,8 +42,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
         })
     }
     else {
-        res.status(401);
-        throw new Error("User not found");
+        return res.status(401).send({
+            err: "User not found",
+        });
     }
 });
 
@@ -51,13 +52,16 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @route   POST api/users
 // @access  public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
 
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-        res.status(400);
-        throw new Error("User already registered");
+        return res.status(409).send({
+            err: "User already registered",
+        });
     }
 
     const user = await User.create({
@@ -67,7 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
-        res.status(200).json({
+        return res.status(200).json({
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -76,8 +80,9 @@ const registerUser = asyncHandler(async (req, res) => {
         })
     }
     else {
-        res.status(400);
-        throw new Error("Invalid user data");
+        return res.status(400).send({
+            err: "Invalid user data",
+        });
     }
 });
 

@@ -23,7 +23,7 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if(userLogin){
-
+            
         }
     }, [userLogin, redirect])
 
