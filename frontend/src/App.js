@@ -21,7 +21,7 @@ function App() {
                             <Route exact path='/product/:id' element={<ProductScreen />} />
                             <Route exact path='/cart/:id?' element={<CartScreen />} />
                             <Route exact path='/login' element={<LoginScreen />} />
-                            <Route exact path='register' element={<RegisterScreen />} />
+                            <Route exact path='/register' element={<RegisterScreen />} />
                         </Routes>
                     </Container>
                 </main>
