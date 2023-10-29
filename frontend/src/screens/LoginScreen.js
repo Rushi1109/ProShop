@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from "react-redux";
 import { login } from '../redux/slices/userSlice';
@@ -13,19 +13,20 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
 
     const location = useLocation();
-    const redirect = location.search ? location.search.split('=')[1] : '/';
+    const redirect = location.search ? location.search.split('=')[1] : '';
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const userLogin = useSelector(state => state.userReducer.userLogin);
     const err = useSelector(state => state.userReducer.error);
     const status = useSelector(state => state.userReducer.status);
 
     useEffect(() => {
-        if(userLogin){
-            
+        if (userLogin) {
+            navigate(`/${redirect}`);
         }
-    }, [userLogin, redirect])
+    }, [redirect, userLogin, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -43,7 +44,7 @@ const LoginScreen = () => {
             <FormContainer>
                 <h1>Sign In</h1>
                 {err && <Message variant='danger'>{err}</Message>}
-                {status === 'loading'? <Loader />:<></>}
+                {status === 'loading' ? <Loader /> : <></>}
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='email'>
                         <Form.Label>Email Address</Form.Label>

@@ -29,6 +29,7 @@ const CartScreen = () => {
     }, [dispatch, parameters.id, qty]);
 
     const cartItems = useSelector(state => state.cartReducer.cart);
+    const userLogin = useSelector(state => state.userReducer.userLogin);
 
     const changeQtyHandler = (id, qty) => {
         const args = {
@@ -43,7 +44,12 @@ const CartScreen = () => {
     }
 
     const checkoutHandler = () => {
-        navigate('/login?redirect=shipping');
+        if (userLogin) {
+            navigate('/shipping')
+        }
+        else {
+            navigate('/login?redirect=shipping');
+        }
     }
 
     return (
